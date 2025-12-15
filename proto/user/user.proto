@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "grpc-microservices/proto/user";
+
+// User Service Definition
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+  rpc GetUser (GetUserRequest) returns (UserResponse);
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+}
+
+// Messages
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string phone = 3;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message UserResponse {
+  User user = 1;
+  string message = 2;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+}
